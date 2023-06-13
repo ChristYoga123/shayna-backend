@@ -1,57 +1,98 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ShaynaAdmin - HTML5 Admin Template</title>
-    <meta name="description" content="ShaynaAdmin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Login &mdash; Stisla</title>
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{{ asset("auth-assets/modules/bootstrap/css/bootstrap.min.css") }}">
+  <link rel="stylesheet" href="{{ asset("auth-assets/modules/fontawesome/css/all.min.css") }}">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="{{ asset("assets/css/cs-skin-elastic.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{{ asset("auth-assets/modules/bootstrap-social/bootstrap-social.css") }}">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ asset("auth-assets/css/style.css") }}">
+  <link rel="stylesheet" href="{{ asset("auth-assets/css/components.css") }}">
+  <script src="{{ asset("sweetalert2/dist/sweetalert2.all.min.js") }}"></script>
 </head>
-<body class="bg-dark">
 
-  <div class="sufee-login d-flex align-content-center flex-wrap rounded-xl">
-      <div class="container">
-          <div class="login-content">
-              <div class="login-form">
-                  <form>
-                      <div class="form-group">
-                          <label>Email address</label>
-                          <input type="email" class="form-control" placeholder="Email">
-                      </div>
-                      <div class="form-group">
-                          <label>Password</label>
-                          <input type="password" class="form-control" placeholder="Password">
-                      </div>
-                      <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Masuk</button>
-                  </form>
+<body>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-brand">
+              <img src="{{ asset("images/logo.png") }}" alt="logo" width="100" class="shadow-light">
+            </div>
+
+            <div class="card card-primary">
+              <div class="card-header"><h4>Login</h4></div>
+
+              <div class="card-body">
+                <form method="POST" action="{{ route("admin.login") }}" class="needs-validation">
+                  @csrf
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <div class="invalid-feedback">
+                      Masukkan email
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="password" class="control-label">Password</label>
+                    </div>
+                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      Masukkan password
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                      Login
+                    </button>
+                  </div>
+                </form>
               </div>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; Stisla 2018
+            </div>
           </div>
+        </div>
       </div>
+    </section>
   </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="{{ asset("assets/js/main.js") }}"></script>
+  <!-- General JS Scripts -->
+  <script src="{{ asset("auth-assets/modules/jquery.min.js") }}"></script>
+  <script src="{{ asset("auth-assets/modules/popper.js") }}"></script>
+  <script src="{{ asset("auth-assets/modules/tooltip.js") }}"></script>
+  <script src="{{ asset("auth-assets/modules/bootstrap/js/bootstrap.min.js") }}"></script>
+  <script src="{{ asset("auth-assets/modules/nicescroll/jquery.nicescroll.min.js") }}"></script>
+  <script src="{{ asset("auth-assets/modules/moment.min.js") }}"></script>
+  <script src="{{ asset("auth-assets/js/stisla.js") }}"></script>
+  
+  <!-- JS Libraies -->
 
+  <!-- Page Specific JS File -->
+  
+  <!-- Template JS File -->
+  <script src="{{ asset("auth-assets/js/scripts.js") }}"></script>
+  <script src="{{ asset("auth-assets/js/custom.js") }}"></script>
+  @if (session("error"))
+  <script>
+    Swal.fire(
+      "Gagal",
+      `{{ session("error") }}`,
+      "error"
+    );
+  </script>  
+  @endif
 </body>
 </html>

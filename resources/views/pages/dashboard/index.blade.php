@@ -153,3 +153,15 @@
     </div>
     <!-- .animated -->
 @endsection
+
+@push('script')
+@if (session("success"))
+    <script>
+        Swal.fire(
+            "Sukses",
+            `{{ session("success") }}`,
+            "success"
+        );
+    </script>
+@endif
+@endpush
