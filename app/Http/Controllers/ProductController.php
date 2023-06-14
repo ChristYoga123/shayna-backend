@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductGallery;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -59,7 +61,9 @@ class ProductController extends Controller
      */
     public function show(Product $barang)
     {
-        //
+        return view("pages.product.show")->with([
+            "product" => $barang
+        ]);
     }
 
     /**
@@ -103,6 +107,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $barang)
     {
+        foreach ($barang->ProductGalleries as $galeri) {
+            Storage::delete("public/" . $galeri->image);
+        }
+        ProductGallery::whereProductId($barang->id)->delete();
         $barang->delete();
         return redirect()->back()->with("success", "Data berhasil dihapus");
     }

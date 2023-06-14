@@ -12,37 +12,31 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Data Table</strong>
+                    <strong class="card-title">Galeri Produk</strong>
                 </div>
                 <div class="card-body">
                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Nama</th>
-                                <th>Tipe</th>
-                                <th>Harga (Rp)</th>
-                                <th>Jumlah</th>
+                                <th>Nama Barang</th>
+                                <th>Foto</th>
+                                <th>Default</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            @foreach ($product_galleries as $product_gallery)
                                 <tr>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->type }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ $product_gallery->Product->name }}</td>
                                     <td>
-                                        <a href="{{ route("admin.barang.show", $product->slug) }}" class="btn btn-info btn-sm">
-                                            <i class="fa fa-picture-o"></i>
-                                        </a>
-                                        <a href="{{ route("admin.barang.edit", $product->slug) }}" class="btn btn-warning btn-sm">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <form action="{{ route("admin.barang.destroy", $product->slug) }}" method="post" class="d-inline" id="hapus">
+                                        <img src="/storage/{{ ($product_gallery->image) }}" alt="" width="150px">
+                                    </td>
+                                    <td>{{ $product_gallery->is_default ? 'Ya' : 'Tidak' }}</td>
+                                    <td>
+                                        <form action="{{ route('admin.galeri.destroy', $product_gallery->id) }}" method="post" class="d-inline">
                                             @csrf
-                                            @method("DELETE")
-                                            <button type="button" class="btn btn-danger btn-sm" id="hapus">
+                                            @method('DELETE')
+                                            <button type="button" id="hapus" class="btn-sm btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -87,14 +81,14 @@
 
         $("button#hapus").on("click", function () {
             Swal.fire({
-            title: 'Apakah anda yakin untuk menghapus data ini? Ini akan menghapus data galeri juga',
+            title: 'Apakah anda yakin untuk menghapus data ini?',
             showDenyButton: true,
             confirmButtonText: 'Hapus',
             denyButtonText: `Batal`,
             }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                $("form#hapus").submit();
+                $("form").submit();
             } else if (result.isDenied) {
                 Swal.fire('Batal', 'Data batal dihapus', 'info')
             }

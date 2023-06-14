@@ -29,11 +29,15 @@
 
                 <div class="form-group">
                     <label for="type" class="form-control-label">Tipe Barang</label>
-                    <input type="text"
-                           name="type"
-                           id="type"
-                           value="{{ old('type', $product->type) }}" 
-                           class="form-control @error('type') is-invalid @enderror"/>
+                    <select name="type" 
+                            id="type"
+                            class="form-control @error('type') is-invalid @enderror">
+
+                            <option value="Shirts" {{ $product->type === "Shirts" ? "selected" : "" }}>Shirts</option>
+                            <option value="Hat" {{ $product->type === "Hat" ? "selected" : "" }}>Hat</option>
+                            <option value="Pants" {{ $product->type === "Pants" ? "selected" : "" }}>Pants</option>
+
+                    </select>
                     @error('type')
                         <div class="text-muted">
                             {{ $message }}

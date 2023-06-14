@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 /* non Auth */
 
+Route::get("/", function () {
+    return view("welcome");
+});
+
 Route::prefix("admin")->name("admin.")->middleware("guest")->group(function () {
     Route::get("login", [AuthController::class, "index"])->name("login.index");
     Route::post("login", [AuthController::class, "login"])->name("login");
@@ -31,4 +36,6 @@ Route::prefix("admin")->name("admin.")->middleware("auth")->group(function () {
     Route::get('/', [DashboardController::class, "index"])->name("dashboard.index");
     // Product
     Route::resource("barang", ProductController::class);
+    // Product Gallery
+    Route::resource("galeri", ProductGalleryController::class)->only(["index", "create", "store", "destroy"]);
 });

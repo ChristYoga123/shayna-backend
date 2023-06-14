@@ -16,11 +16,11 @@
                 </li>
 
                 <li class="menu-title">Foto Barang</li><!-- /.menu-title -->
-                <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-list"></i>Lihat Foto Barang</a>
+                <li class="{{ Route::is("admin.galeri.index") ? "active" : "" }}">
+                    <a href="{{ route("admin.galeri.index") }}"> <i class="menu-icon fa fa-list"></i>Lihat Foto Barang</a>
                 </li>
-                <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-plus"></i>Tambah Foto Barang</a>
+                <li class="{{ Route::is("admin.galeri.create") ? "active" : "" }}">
+                    <a href="{{ route("admin.galeri.create") }}"> <i class="menu-icon fa fa-plus"></i>Tambah Foto Barang</a>
                 </li>
 
                 <li class="menu-title">Transaksi</li><!-- /.menu-title -->
