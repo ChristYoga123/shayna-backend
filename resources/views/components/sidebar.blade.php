@@ -24,8 +24,8 @@
                 </li>
 
                 <li class="menu-title">Transaksi</li><!-- /.menu-title -->
-                <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-list"></i>Lihat Transaksi</a>
+                <li class="{{ Route::is("admin.transaksi.index") ? "active" : "" }}">
+                    <a href="{{ route("admin.transaksi.index") }}"> <i class="menu-icon fa fa-list"></i>Lihat Transaksi</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

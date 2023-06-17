@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +39,6 @@ Route::prefix("admin")->name("admin.")->middleware("auth")->group(function () {
     Route::resource("barang", ProductController::class);
     // Product Gallery
     Route::resource("galeri", ProductGalleryController::class)->only(["index", "create", "store", "destroy"]);
+    // Transaction
+    Route::resource('transaksi', TransactionController::class)->only(["index", "show"]);
 });

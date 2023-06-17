@@ -26,11 +26,11 @@
             @yield('content')
         </div>
         <div class="clearfix"></div>
-        @include('components.footer')
+        {{-- @include('components.footer') --}}
     </div>
 
     {{-- Script --}}
-    @stack('script')
     @include('components.script')
+    @stack('script')
 </body>
 </html>

@@ -14,7 +14,7 @@ class ProductGalleryController extends Controller
     public function index()
     {
         return view("pages.product-gallery.index")->with([
-            "product_galleries" => ProductGallery::all()
+            "product_galleries" => ProductGallery::with("Product")->get()
         ]);
     }
 
