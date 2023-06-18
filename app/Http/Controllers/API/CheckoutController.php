@@ -34,12 +34,12 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "user_id" => "required|integer|exists:users,id",
+            "name" => "required|max:255",
+            "email" => "required|email|max:255",
+            "phone_number" => "required|numeric",
             "shipping_address" => "required",
             "transaction_details" => "required|array",
             "transaction_details.*" => "integer|exists:products,id",
-            "quantity" => "required|array",
-            "quantity.*" => "integer"
         ]);
 
         DB::beginTransaction();
@@ -53,25 +53,20 @@ class CheckoutController extends Controller
             }
             // insert transaction
             $transaction = Transaction::create([
-                "user_id" => $request->user_id,
+                "name" => $request->name,
+                "email" => $request->email,
+                "phone_number" => $request->phone_number,
                 "shipping_address" => $request->shipping_address,
                 "total" => $total,
             ]);
             // insert transaction detail
             foreach ($request->transaction_details as $index => $transaction_detail) {
-                // check quantity is its still exists or not
-                if ($this->isEmptyProduct($transaction_detail, $request->quantity[$index])) {
-                    DB::rollBack();
-                    return ResponseFormatter::error(null, "Maaf, stok belum tersedia.");
-                }
-
                 $details[] = new TransactionDetail([
                     "transaction_id" => $transaction->id,
                     "product_id" => $transaction_detail,
-                    "quantity" => $request->quantity[$index]
                 ]);
 
-                Product::find($transaction_detail)->decrement("quantity", $request->quantity[$index]);
+                Product::find($transaction_detail)->decrement("quantity");
             }
 
             $transaction->TransactionDetails()->saveMany($details);
@@ -138,11 +133,5 @@ class CheckoutController extends Controller
         return ResponseFormatter::success([
             "transaction" => "success"
         ], "Pembayaran berhasil masuk");
-    }
-
-    private function isEmptyProduct($id, $quantity_request)
-    {
-        $product = Product::find($id);
-        return $product->quantity < $quantity_request;
     }
 }
