@@ -19,6 +19,7 @@
                         <thead>
                             <tr>
                                 <th>Foto</th>
+                                <th>Default</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,6 +28,7 @@
                                     <td>
                                         <img src="/storage/{{ ($product_gallery->image) }}" alt="" width="150px">
                                     </td>
+                                    <td>{{ $product_gallery->is_default ? "Ya" : "Tidak" }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

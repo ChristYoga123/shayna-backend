@@ -29,9 +29,9 @@
                         <tbody>
                             @foreach ($transactions as $transaction)
                                 <tr>
-                                    <td>{{ $transaction->User->name }}</td>
-                                    <td>{{ $transaction->User->email }}</td>
-                                    <td>{{ $transaction->User->phone }}</td>
+                                    <td>{{ $transaction->name }}</td>
+                                    <td>{{ $transaction->email }}</td>
+                                    <td>{{ $transaction->phone_number }}</td>
                                     <td>{{ $transaction->total }}</td>
                                     <td>
                                         @if ($transaction->payment_status === "waiting")
@@ -105,7 +105,6 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Tipe</th>
-                                    <th>Kuantitas</th>
                                 </tr>
                                 <tbody class="pembelian-row"></tbody>
                             </table>
@@ -136,9 +135,9 @@
                 $("#loading").addClass("d-none");
                 $("#modal-table").removeClass("d-none");
                 $(".modal-title").html(`Detail Transaksi - <strong>${response.midtrans_booking_code}</strong>`)
-                $("td#nama").html(`${response.user.name}`)
-                $("td#email").html(`${response.user.email}`)
-                $("td#telepon").html(`${response.user.phone}`)
+                $("td#nama").html(`${response.name}`)
+                $("td#email").html(`${response.email}`)
+                $("td#telepon").html(`${response.phone_number}`)
                 $("td#total").html(`${response.total}`)
                 $("td#status").html(`${response.payment_status}`)
                 $("td#alamat").html(`${response.shipping_address}`)
@@ -148,7 +147,6 @@
                         <tr>
                             <td class="detail-nama">${detail.product.name}</td>
                             <td class="detail-tipe">${detail.product.type}</td>
-                            <td class="detail-kuantitas">${detail.quantity}</td>
                         </tr>
                     `;
                 });

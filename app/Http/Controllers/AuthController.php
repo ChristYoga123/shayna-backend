@@ -20,12 +20,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt(["email" => $request->email, "password" => $request->password])) {
-            // check role
-            if ($this->isAdmin()) {
-                return redirect()->route("admin.dashboard.index")->with("success", "Login berhasil");
-            }
 
-            return redirect()->back()->with("error", "Maaf! Anda dilarang masuk halaman ini");
+            return redirect()->route("admin.dashboard.index")->with("success", "Login berhasil");
         }
 
         return redirect()->back()->with("error", "Maaf! Akun atau password belum terdaftar");
@@ -37,10 +33,5 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route("admin.login.index");
-    }
-
-    private function isAdmin()
-    {
-        return Auth::check() && Auth::user()->role === "Admin";
     }
 }
