@@ -68,7 +68,7 @@
                                         @foreach ($items as $item)
                                             <tr>
                                                 <td class="serial">{{ $item->midtrans_booking_code }}</td>
-                                                <td>  <span class="name">{{ $item->User->name }}</span> </td>
+                                                <td>  <span class="name">{{ $item->name }}</span> </td>
                                                 <td>
                                                     <ul>
                                                         @foreach ($item->TransactionDetails as $detail)
